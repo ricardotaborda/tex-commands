@@ -1,22 +1,4 @@
 
-%\newcommand{\review}[1]{\textcolor{reviewcolor}{#1}}
-
-\makeatletter
-\if@twocolumn
-\newcommand\mycolumnwidth{\columnwidth}
-\else
-\newcommand\mycolumnwidth{0.484\textwidth}
-\fi
-\makeatother
-
-\makeatletter
-\if@twocolumn
-\newcommand\mycolumnwidthreduced{0.9\columnwidth}
-\else
-\newcommand\mycolumnwidthreduced{0.436\textwidth}
-\fi
-\makeatother
-
 % Earthquake macros
 % -----------------
 
@@ -50,6 +32,8 @@
 \newcommand{\mathqp}{Q_{\mathrm{P}}}
 \newcommand{\vsthirty}{$V_{\mathrm{S30}}$}
 \newcommand{\vsthirtyeq}[1]{$V_{\mathrm{S30}}=#1$~m/s}
+\newcommand{\fgeq}[1]{$f\geq#1$~Hz}
+\newcommand{\fleq}[1]{$f\leq#1$~Hz}
 
 % Math macros
 \newcommand{\pepsi}{\epsilon^{p}}
@@ -77,80 +61,155 @@
 \newcommand{\vgrid}[3]{#1 $\times$ #2 $\times$ #3}
 \newcommand{\agrid}[2]{#1 $\times$ #2}
 
-% Some abstract options
+
+% XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+% CV Special Effects
+% ------------------
+
+\newcommand{\cvbibentry}[1]{
+
+	\nocite{#1}
+	\indent\bibentry{#1}.
+}
+
+%\newcommand{\mymidtilde}{\raisebox{-0.6ex}{\~{}}}
+%
+%\newboolean{printInstructions}
+%
+%\newcommand{\instruction}[1]{
+%	\ifthenelse{\boolean{printInstructions}}{
+%		\textcolor{blue}{\footnotesize USGS says: \it #1}
+%	}{}
+%}
+
+% Titles Font Settings
+% --------------------
+
+\allsectionsfont{\usefont{T1}{phv}{b}{n}}
+
+% Sections alphabetic numbering
+% -----------------------------
+
+\renewcommand{\thesection}{\Alph{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\arabic{subsection}.\arabic{subsubsection}}
+\renewcommand{\theparagraph}{\arabic{subsection}.\arabic{subsubsection}.\arabic{paragraph}.}
 
 \makeatletter
-\if@twocolumn
-\setlength{\absleftindent}{0.9in}
-\setlength{\absrightindent}{0.9in}
-\setlength{\absparindent}{0pt}
-\setlength{\abstitleskip}{-1.5em}
-\renewcommand\abstracttextfont{\normalsize}
-\renewcommand\abstractnamefont{\Large}
-%\abslabeldelim{\quad}
-\else
-\@bsruninfalse
-\renewcommand\abstracttextfont{\normalsize}
-\renewcommand\abstractnamefont{\large}
-\fi
+\newcommand{\subsubsubsection}{
+    \@startsection{paragraph}{3}{\z@}%
+    {-2ex \@plus -1ex \@minus -.2ex}%
+    {0.75ex \@plus 0.2ex}%
+    {\small\usefont{T1}{phv}{b}{n}}
+}
 \makeatother
+
+%\makeatletter
+%\renewcommand{\paragraph}{
+%    \@startsection{paragraph}{4}{\z@}{-1.5ex}{0.75ex}%
+%    {\small\usefont{T1}{phv}{b}{n}}
+%}
+%\makeatother
+
+% Squish-List
+% -----------
+
+\newcommand{\squishlist}{
+   \begin{list}{\textbullet}    %$\bullet$ \ascii \BEL {\tiny \textbullet}
+    { \setlength{\itemsep}{0pt}      \setlength{\parsep}{5pt}
+      \setlength{\topsep}{3pt}       \setlength{\partopsep}{0pt}
+      \setlength{\leftmargin}{1.1em} \setlength{\labelwidth}{0.8em}
+      \setlength{\labelsep}{0.5em} } 
+}
+
+\newcommand{\squishend}{
+    \end{list}  }
+
+
+
+
+
+
+
+
+
+
+% Some abstract options
+
+%\makeatletter
+%\if@twocolumn
+%\setlength{\absleftindent}{0.9in}
+%\setlength{\absrightindent}{0.9in}
+%\setlength{\absparindent}{0pt}
+%\setlength{\abstitleskip}{-1.5em}
+%\renewcommand\abstracttextfont{\normalsize}
+%\renewcommand\abstractnamefont{\Large}
+%%\abslabeldelim{\quad}
+%\else
+%\@bsruninfalse
+%\renewcommand\abstracttextfont{\normalsize}
+%\renewcommand\abstractnamefont{\large}
+%\fi
+%\makeatother
 
 % Title and sections fonts and style
 % ----------------------------------
 
-\titleformat{\section}{\centering}{}{0pt}{\large}
-
-\titleformat{\subsection}{}{}{1.5em}{\normalsize}
-
-\titleformat{\subsubsection}[runin]{}{}{0pt}{\normalsize\itshape}[.]
+%\titleformat{\section}{\centering}{}{0pt}{\large}
+%
+%\titleformat{\subsection}{}{}{1.5em}{\normalsize}
+%
+%\titleformat{\subsubsection}[runin]{}{}{0pt}{\normalsize\itshape}[.]
 
 
 % Manuscript tricks
 % -----------------
 
-\newcommand\manuscriptadjust{
-\makeatletter
-\ifthenelse{\boolean{@twocolumn}}{}{\clearpage}
-\makeatother
-}
-
-\newcommand\preprintadjust{
-\makeatletter
-\ifthenelse{\boolean{@twocolumn}}{\small}{}
-\makeatother
-}
+%\newcommand\manuscriptadjust{
+%\makeatletter
+%\ifthenelse{\boolean{@twocolumn}}{}{\clearpage}
+%\makeatother
+%}
+%
+%\newcommand\preprintadjust{
+%\makeatletter
+%\ifthenelse{\boolean{@twocolumn}}{\small}{}
+%\makeatother
+%}
 
 % Figure and Table captions configuration
 % ---------------------------------------
 
-\captionsetup[table]{
-%	labelfont=large,
-	labelsep=newline,
-	justification=centerlast,
-	textfont=small
-}
-\captionsetup[figure]{
-	labelfont=bf,
-	labelsep=period,
-	textfont=small
-}
+%\captionsetup[table]{
+%%	labelfont=large,
+%	labelsep=newline,
+%	justification=centerlast,
+%	textfont=small
+%}
+%\captionsetup[figure]{
+%	labelfont=bf,
+%	labelsep=period,
+%	textfont=small
+%}
 
-\newcommand\introduction{
-\makeatletter
-\ifthenelse{\boolean{@twocolumn}}{
-	~\newline
-	\vspace{-15ex}
-	\section{Introduction}
-	}{
-	\section{Introduction}
-	}
-\makeatother
-}
+%\newcommand\introduction{
+%\makeatletter
+%\ifthenelse{\boolean{@twocolumn}}{
+%	~\newline
+%	\vspace{-15ex}
+%	\section{Introduction}
+%	}{
+%	\section{Introduction}
+%	}
+%\makeatother
+%}
 
-\newcommand\corresponding{%
-	\makeatletter\ifthenelse{\boolean{@twocolumn}}
-	{}{\thanks{Corresponding author.}~}
-\makeatother
-}%
+%\newcommand\corresponding{%
+%	\makeatletter\ifthenelse{\boolean{@twocolumn}}
+%	{}{\thanks{Corresponding author.}~}
+%\makeatother
+%}%
 
 
